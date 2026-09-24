@@ -1,0 +1,13 @@
+groq
+pandas
+numpy
+scikit-learn
+xgboost
+transformers
+sentence-transformer
+torch
+matplotlib
+seaborn
+jupyter
+notebook
+joblib

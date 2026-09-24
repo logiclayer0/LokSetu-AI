@@ -1,0 +1,100 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: loksetu-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: loksetu
+      POSTGRES_PASSWORD: loksetu_password
+      POSTGRES_DB: loksetu_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - loksetu-network
+
+  mongodb:
+    image: mongo:7
+    container_name: loksetu-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: loksetu
+      MONGO_INITDB_ROOT_PASSWORD: loksetu_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - loksetu-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: loksetu-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - loksetu-network
+
+  neo4j:
+    image: neo4j:5
+    container_name: loksetu-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/loksetu_password
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - loksetu-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: loksetu-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+      - neo4j
+    networks:
+      - loksetu-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: loksetu-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - loksetu-network
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:
+  neo4j_data:
+
+networks:
+  loksetu-network:
+    driver: bridge
