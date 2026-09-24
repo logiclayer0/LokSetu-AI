@@ -1,8 +1,11 @@
 import json
+import logging
 from groq import Groq
 
 from app.core.config import settings
 
+
+logger = logging.getLogger(__name__)
 
 client = Groq(api_key=settings.GROQ_API_KEY)
 
@@ -19,8 +22,12 @@ def _call_groq(system_prompt: str, user_prompt: str, json_mode: bool = False) ->
     }
     if json_mode:
         kwargs["response_format"] = {"type": "json_object"}
+
+    logger.info(f"Groq call - model: {settings.GROQ_MODEL}, json_mode: {json_mode}")
     response = client.chat.completions.create(**kwargs)
-    return response.choices[0].message.content
+    content = response.choices[0].message.content
+    logger.info(f"Groq response: {content[:200]}")
+    return content
 
 
 async def categorize_complaint(text: str) -> dict:
@@ -34,8 +41,11 @@ async def categorize_complaint(text: str) -> dict:
     )
     try:
         result = _call_groq(system_prompt, text, json_mode=True)
-        return json.loads(result)
-    except Exception:
+        parsed = json.loads(result)
+        logger.info(f"Categorized: {parsed}")
+        return parsed
+    except Exception as e:
+        logger.error(f"categorize_complaint FAILED: {type(e).__name__} - {str(e)}")
         return {
             "category": "Other",
             "department": "General",
@@ -60,8 +70,11 @@ async def simulate_policy_impact(title: str, description: str, region: str, budg
     )
     try:
         result = _call_groq(system_prompt, user_prompt, json_mode=True)
-        return json.loads(result)
-    except Exception:
+        parsed = json.loads(result)
+        logger.info(f"Policy simulation: {parsed}")
+        return parsed
+    except Exception as e:
+        logger.error(f"simulate_policy_impact FAILED: {type(e).__name__} - {str(e)}")
         return {
             "estimated_beneficiaries": 0,
             "budget_utilization_percent": 0,
@@ -82,5 +95,6 @@ async def generate_insights(complaints: list[dict]) -> dict:
     try:
         result = _call_groq(system_prompt, user_prompt, json_mode=True)
         return json.loads(result)
-    except Exception:
+    except Exception as e:
+        logger.error(f"generate_insights FAILED: {type(e).__name__} - {str(e)}")
         return {"top_issues": [], "emerging_trends": [], "recommended_actions": []}
