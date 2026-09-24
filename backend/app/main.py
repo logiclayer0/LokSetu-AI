@@ -1,9 +1,5 @@
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -18,6 +14,12 @@ from app.core.database import (
     close_redis,
     connect_neo4j,
     close_neo4j,
+)
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 
