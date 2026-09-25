@@ -35,33 +35,33 @@
 ### 1. Login — Role-Based Access
 Clean sign-in with role selection (Admin / Citizen / Officer / Analyst).
 
-![Login](docs/screenshots/01-login.jpg)
+![Login](docs/screenshots/01-login.jpg.png)
 
 ### 2. Admin Dashboard
 Overview of total complaints, resolved, pending, and high-priority items.
 
-![Dashboard](docs/screenshots/02-dashboard.jpg)
+![Dashboard](docs/screenshots/02-dashboard.jpg.png)
 
 ### 3. Complaints — Multilingual + AI Categorization
 Complaints in Hindi, English, and Tamil. AI auto-assigns category (Road, Water, Electricity, Health…), department, and priority.
 
-![Complaints](docs/screenshots/03-complaints.jpg)
+![Complaints](docs/screenshots/03-complaints.jpg.png)
 
 ### 4. Analytics — Charts + Demand Map
 Category distribution pie chart and interactive India map highlighting demand hotspots.
 
-![Analytics](docs/screenshots/04-analytics.jpg)
+![Analytics](docs/screenshots/04-analytics.jpg.png)
 
 ### 5. Policy Simulator
 Input any policy (title, description, region, budget) → AI forecasts beneficiaries, budget utilization, risk score, timeline, expected impact, and recommendations.
 
 
-![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg)
+![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg.png)
 
 ### 6. Admin Panel & Notifications
 System health (Database, API, AI Engine) and platform stats, with real-time notifications.
 
-![Admin Panel](docs/screenshots/07-admin-panel.jpg)
+![Admin Panel](docs/screenshots/07-admin-panel.jpg.png)
 
 
 
