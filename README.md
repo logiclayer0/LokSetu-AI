@@ -30,6 +30,46 @@
 
 ---
 
+## Screenshots
+
+### 1. Login — Role-Based Access
+Clean sign-in with role selection (Admin / Citizen / Officer / Analyst).
+
+![Login](docs/screenshots/01-login.jpg)
+
+### 2. Admin Dashboard
+Overview of total complaints, resolved, pending, and high-priority items.
+
+![Dashboard](docs/screenshots/02-dashboard.jpg)
+
+### 3. Complaints — Multilingual + AI Categorization
+Complaints in Hindi, English, and Tamil. AI auto-assigns category (Road, Water, Electricity, Health…), department, and priority.
+
+![Complaints](docs/screenshots/03-complaints.jpg)
+
+### 4. Analytics — Charts + Demand Map
+Category distribution pie chart and interactive India map highlighting demand hotspots.
+
+![Analytics](docs/screenshots/04-analytics.jpg)
+
+### 5. Policy Simulator
+Input any policy (title, description, region, budget) → AI forecasts beneficiaries, budget utilization, risk score, timeline, expected impact, and recommendations.
+
+![Policy Simulator Input](docs/screenshots/05-policy-simulator-empty.jpg)
+
+![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg)
+
+### 6. Admin Panel & Notifications
+System health (Database, API, AI Engine) and platform stats, with real-time notifications.
+
+![Admin Panel](docs/screenshots/07-admin-panel.jpg)
+
+![Notifications](docs/screenshots/08-notifications.jpg)
+
+> Full screenshot walkthrough PDF is available for presentations and Drive sharing.
+
+---
+
 ## Problem Statement
 
 Governments across BRICS nations struggle to consolidate citizen feedback and align it with national infrastructure priorities. Development requests live in fragmented systems, leading to:
@@ -51,7 +91,7 @@ Governments across BRICS nations struggle to consolidate citizen feedback and al
 | Feature | Description |
 |---------|-------------|
 | **Multilingual Aggregation** | Supports 13+ Indian languages with automatic detection and translation |
-| **AI-Powered Categorization** | Groq LLaMA 3.3 70B classifies complaints and routes them to correct departments |
+| **AI-Powered Categorization** | Groq LLM classifies complaints and routes them to correct departments |
 | **Demand Hotspot Detection** | Geospatial analytics identifies high-priority zones on interactive maps |
 | **Duplicate Detection** | Graph intelligence prevents fraudulent and duplicate beneficiary entries |
 | **Policy Simulation Engine** | AI forecasts policy impact before implementation |
@@ -107,7 +147,7 @@ Governments across BRICS nations struggle to consolidate citizen feedback and al
 
 | Technology | Purpose |
 |------------|---------|
-| Groq API | LLaMA 3.3 70B for ultra-fast inference |
+| Groq API | Fast LLM inference (openai/gpt-oss-20b) |
 | Whisper Large v3 | Voice transcription |
 | LangChain | LLM orchestration |
 | HuggingFace Transformers | NLP pipelines |
@@ -187,21 +227,9 @@ loksetu-ai/
 │   ├── requirements.txt
 │   └── Dockerfile
 │
-├── ml-pipeline/              ML training scripts
-│   ├── data/
-│   ├── notebooks/
-│   ├── models/
-│   └── training/
-│
-├── data/                     Datasets
-│   ├── raw/
-│   ├── processed/
-│   └── synthetic/
-│
-├── docs/                     Documentation
-├── .github/workflows/        CI/CD
+├── docs/
+│   └── screenshots/          UI screenshots for README
 ├── docker-compose.yml
-├── render.yaml
 └── README.md
 ```
 
@@ -221,8 +249,8 @@ loksetu-ai/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/loksetu-ai.git
-cd loksetu-ai
+git clone https://github.com/logiclayer0/LokSetu-AI.git
+cd LokSetu-AI
 ```
 
 ### Backend Setup
@@ -278,7 +306,7 @@ PORT=8000
 API_V1_PREFIX=/api/v1
 
 GROQ_API_KEY=your_groq_api_key_here
-GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_MODEL=openai/gpt-oss-20b
 
 DATABASE_URL=sqlite:///./loksetu.db
 MONGODB_URL=mongodb://localhost:27017
