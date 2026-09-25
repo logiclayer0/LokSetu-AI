@@ -28,42 +28,57 @@
 
 > **Note:** Backend is hosted on Render's free tier. First request may take 30-60 seconds due to cold start.
 
+
 ---
+
+## Demo Video
+
+Watch the full platform walkthrough — login, multilingual complaints, AI categorization, analytics, policy simulator, and admin panel.
+
+<div align="center">
+
+<video src="demovedio/LokSetu-AI-Demo-Final.mp4" controls playsinline width="100%" style="max-width: 900px; border-radius: 12px;">
+  Your browser does not support the video tag.
+  <a href="demovedio/LokSetu-AI-Demo-Final.mp4">Download the demo video</a>
+</video>
+
+</div>
+
+> **How to view:** Click the play button on the video above (or open the file from the `demovedio/` folder).  
+> Voice narration + captions included.
+
 
 ## Screenshots
 
 ### 1. Login — Role-Based Access
 Clean sign-in with role selection (Admin / Citizen / Officer / Analyst).
 
-![Login](docs/screenshots/01-login.jpg.png)
+![Login](docs/screenshots/01-login.jpg)
 
 ### 2. Admin Dashboard
 Overview of total complaints, resolved, pending, and high-priority items.
 
-![Dashboard](docs/screenshots/02-dashboard.jpg.png)
+![Dashboard](docs/screenshots/02-dashboard.jpg)
 
 ### 3. Complaints — Multilingual + AI Categorization
 Complaints in Hindi, English, and Tamil. AI auto-assigns category (Road, Water, Electricity, Health…), department, and priority.
 
-![Complaints](docs/screenshots/03-complaints.jpg.png)
+![Complaints](docs/screenshots/03-complaints.jpg)
 
 ### 4. Analytics — Charts + Demand Map
 Category distribution pie chart and interactive India map highlighting demand hotspots.
 
-![Analytics](docs/screenshots/04-analytics.jpg.png)
+![Analytics](docs/screenshots/04-analytics.jpg)
 
 ### 5. Policy Simulator
 Input any policy (title, description, region, budget) → AI forecasts beneficiaries, budget utilization, risk score, timeline, expected impact, and recommendations.
 
-
-![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg.png)
+![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg)
 
 ### 6. Admin Panel & Notifications
 System health (Database, API, AI Engine) and platform stats, with real-time notifications.
 
-![Admin Panel](docs/screenshots/07-admin-panel.jpg.png)
-
-
+![Admin Panel](docs/screenshots/07-admin-panel.jpg)
 
 ---
 
@@ -224,6 +239,7 @@ loksetu-ai/
 │   ├── requirements.txt
 │   └── Dockerfile
 │
+├── demovedio/                Demo walkthrough video
 ├── docs/
 │   └── screenshots/          UI screenshots for README
 ├── docker-compose.yml
