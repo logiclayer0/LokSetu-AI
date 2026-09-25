@@ -33,7 +33,7 @@
 
 ## Demo Video
 
-Watch the full platform walkthrough — login, multilingual complaints, AI categorization, analytics, policy simulator, and admin panel.
+![Demo Video](docs/LokSetu-AI-Demo-Final.mp4)
 
 <div align="center">
 
