@@ -33,19 +33,15 @@
 
 ## Demo Video
 
-![Demo Video](docs/LokSetu-AI-Demo-Final.mp4)
+Watch the full platform walkthrough — login, multilingual complaints, AI categorization, analytics, policy simulator, and admin panel.
 
 <div align="center">
 
-<video src="docs/LokSetu-AI-Demo-Final.mp4" controls playsinline width="100%" style="max-width: 900px; border-radius: 12px;">
-  Your browser does not support the video tag.
-  <a href="docs/LokSetu-AI-Demo-Final.mp4">Download the demo video</a>
-</video>
+[![LokSetu AI Demo](https://img.youtube.com/vi/_S1Qwj3oIGY/maxresdefault.jpg)](https://youtu.be/_S1Qwj3oIGY)
+
+**[▶ Watch on YouTube](https://youtu.be/_S1Qwj3oIGY)**
 
 </div>
-
-> **How to view:** Click the play button on the video above (or open the file from the `docs/` folder).  
-> Voice narration + captions included.
 
 
 ## Screenshots
@@ -240,7 +236,6 @@ loksetu-ai/
 │   └── Dockerfile
 │
 ├── docs/
-│   ├── LokSetu-AI-Demo-Final.mp4   Demo walkthrough video
 │   └── screenshots/          UI screenshots for README
 ├── docker-compose.yml
 └── README.md
