@@ -55,7 +55,6 @@ Category distribution pie chart and interactive India map highlighting demand ho
 ### 5. Policy Simulator
 Input any policy (title, description, region, budget) → AI forecasts beneficiaries, budget utilization, risk score, timeline, expected impact, and recommendations.
 
-![Policy Simulator Input](docs/screenshots/05-policy-simulator-empty.jpg)
 
 ![Policy Simulator Results](docs/screenshots/06-policy-simulator-results.jpg)
 
@@ -64,9 +63,7 @@ System health (Database, API, AI Engine) and platform stats, with real-time noti
 
 ![Admin Panel](docs/screenshots/07-admin-panel.jpg)
 
-![Notifications](docs/screenshots/08-notifications.jpg)
 
-> Full screenshot walkthrough PDF is available for presentations and Drive sharing.
 
 ---
 
