@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+import logging
 
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
@@ -8,6 +9,7 @@ from app.services.ai_service import categorize_complaint
 from app.services.nlp_service import detect_language, translate_to_english
 
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -36,41 +38,52 @@ fake_complaints_db = []
 
 @router.post("/", response_model=ComplaintResponse, status_code=201)
 async def create_complaint(complaint: ComplaintCreate):
-    detected_lang = complaint.language
-    if detected_lang == "auto":
-        detected_lang = detect_language(complaint.description)
+    try:
+        detected_lang = complaint.language or "auto"
+        if detected_lang == "auto":
+            detected_lang = detect_language(complaint.description)
 
-    english_text = translate_to_english(complaint.description, detected_lang)
+        english_text = translate_to_english(complaint.description, detected_lang)
 
-    ai_result = await categorize_complaint(english_text)
+        ai_result = await categorize_complaint(english_text)
 
-    complaint_id = f"LS-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-    record = {
-        "complaint_id": complaint_id,
-        "citizen_name": complaint.citizen_name,
-        "citizen_phone": complaint.citizen_phone,
-        "location": complaint.location,
-        "latitude": complaint.latitude,
-        "longitude": complaint.longitude,
-        "original_text": complaint.description,
-        "english_text": english_text,
-        "language": detected_lang,
-        "category": ai_result.get("category", "General"),
-        "department": ai_result.get("department", "Municipal"),
-        "priority": ai_result.get("priority", "Medium"),
-        "status": "Pending",
-        "created_at": datetime.now().isoformat()
-    }
-    fake_complaints_db.append(record)
+        complaint_id = f"LS-{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
-    return ComplaintResponse(
-        complaint_id=complaint_id,
-        status="Pending",
-        category=record["category"],
-        department=record["department"],
-        priority=record["priority"],
-        created_at=record["created_at"]
-    )
+        category = ai_result.get("category") or "Other"
+        department = ai_result.get("department") or "General"
+        priority = ai_result.get("priority") or "Medium"
+
+        record = {
+            "complaint_id": complaint_id,
+            "citizen_name": complaint.citizen_name,
+            "citizen_phone": complaint.citizen_phone,
+            "location": complaint.location,
+            "latitude": complaint.latitude,
+            "longitude": complaint.longitude,
+            "original_text": complaint.description,
+            "english_text": english_text,
+            "language": detected_lang,
+            "category": category,
+            "department": department,
+            "priority": priority,
+            "status": "Pending",
+            "created_at": datetime.now().isoformat()
+        }
+        fake_complaints_db.append(record)
+
+        logger.info(f"Complaint created: {complaint_id} | category={category} | priority={priority}")
+
+        return ComplaintResponse(
+            complaint_id=complaint_id,
+            status="Pending",
+            category=category,
+            department=department,
+            priority=priority,
+            created_at=record["created_at"]
+        )
+    except Exception as e:
+        logger.error(f"create_complaint error: {type(e).__name__} - {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create complaint: {str(e)}")
 
 
 @router.post("/voice", response_model=ComplaintResponse, status_code=201)
@@ -84,6 +97,9 @@ async def create_voice_complaint(
 
     audio_bytes = await audio.read()
     transcribed_text = await transcribe_audio(audio_bytes)
+
+    if not transcribed_text.strip():
+        raise HTTPException(status_code=400, detail="Could not transcribe audio")
 
     complaint = ComplaintCreate(
         citizen_name=citizen_name,
