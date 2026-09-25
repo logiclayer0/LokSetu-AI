@@ -37,14 +37,14 @@ Watch the full platform walkthrough — login, multilingual complaints, AI categ
 
 <div align="center">
 
-<video src="demovedio/LokSetu-AI-Demo-Final.mp4" controls playsinline width="100%" style="max-width: 900px; border-radius: 12px;">
+<video src="docs/LokSetu-AI-Demo-Final.mp4" controls playsinline width="100%" style="max-width: 900px; border-radius: 12px;">
   Your browser does not support the video tag.
-  <a href="demovedio/LokSetu-AI-Demo-Final.mp4">Download the demo video</a>
+  <a href="docs/LokSetu-AI-Demo-Final.mp4">Download the demo video</a>
 </video>
 
 </div>
 
-> **How to view:** Click the play button on the video above (or open the file from the `demovedio/` folder).  
+> **How to view:** Click the play button on the video above (or open the file from the `docs/` folder).  
 > Voice narration + captions included.
 
 
@@ -239,8 +239,8 @@ loksetu-ai/
 │   ├── requirements.txt
 │   └── Dockerfile
 │
-├── demovedio/                Demo walkthrough video
 ├── docs/
+│   ├── LokSetu-AI-Demo-Final.mp4   Demo walkthrough video
 │   └── screenshots/          UI screenshots for README
 ├── docker-compose.yml
 └── README.md
