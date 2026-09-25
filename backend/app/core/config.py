@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
 
     GROQ_API_KEY: str
-    GROQ_MODEL: str = "llama-3.1-8b-instant"
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
 
     DATABASE_URL: str
     MONGODB_URL: str
