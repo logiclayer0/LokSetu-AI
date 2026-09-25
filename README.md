@@ -425,7 +425,7 @@ VITE_MAP_TILE_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 |------|--------|
 | 1 | Create Web Service at [render.com](https://render.com) |
 | 2 | Root directory: `backend` |
-| 3 | Build command: `pip install -r requirements.txt |
+| 3 | Build command: `pip install -r requirements.txt` |
 | 4 | Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
 | 5 | Add environment variables (see `.env.example`) |
 | 6 | Deploy |
